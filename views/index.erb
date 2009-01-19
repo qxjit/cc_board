@@ -1,10 +1,62 @@
 <html>
-  <head>
+  <head id="head">
     <title>CC Board</title>
-    <link href="application.css" rel="stylesheet"></link>
-    <meta http-equiv="refresh" content="10" />
+    <link href="application.css" rel="stylesheet" />
+    <script type="text/javascript" src="mootools-1.2.1-core-yc.js"></script>
+    <script type="text/javascript" src="css_packed.js"></script>
+    <script type="text/javascript">
+      css = new CSS();
+      allow_refresh = false;
+
+      function enableRefresh() {
+        if(!allow_refresh) { 
+          allow_refresh = true;
+          setTimeout(function() { if(allow_refresh) {window.location.href = window.location.href} }, 10000);
+        }
+      }
+
+      function disableRefresh() {
+        allow_refresh = false;
+      }
+
+      function toggleSettingsPanel() {
+        var panel = $('settings_panel');
+        if (panel.style.visibility == 'hidden') {
+          disableRefresh();
+          panel.style.visibility = 'visible';
+        } else {
+          enableRefresh();
+          panel.style.visibility = 'hidden';
+        }
+      }
+
+      function changeTextSize(size) {
+        css.add_rules({
+          '.build' : {
+            'font-size' : size + '%'
+          }
+        });
+        css.refresh();
+        $('text_size_input').value = size;
+        Cookie.write('font-size-setting', size, {duration: 365});
+      }
+
+      window.onload = function() {
+        enableRefresh();
+
+        if(Cookie.read('font-size-setting')) {
+          changeTextSize(Cookie.read('font-size-setting'));
+        }
+      }
+    </script>
   </head>
-  <body>
+  <body id="body">
+    <div id="settings_panel">
+      <form action="#">
+        Text Size: <input id="text_size_input" type="text" onchange="changeTextSize(this.value)"/>%
+      </form>
+    </div>
+    <div id="settings_button" onclick="toggleSettingsPanel();">+</div>
     <% @build_lists.each do |list| %>
       <% list.each do |build| %>
         <div class="build <%= build.status %>"><%= build.name %></div>

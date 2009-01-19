@@ -1,5 +1,7 @@
 body {
   background-color: #DDD;
+  padding: 0;
+  margin: 0;
 }
 
 .build {
@@ -8,9 +10,35 @@ body {
   padding: 5px;
   float: left;
   margin: 2px;
+
+  /* without this, weirdness can happen when playing with text sizes:
+      changing font-size from 700 to 701 will actually make boxes take up
+      less height total in firefox
+  */ 
+  line-height: 100%;
 }
 
 .failure {
   border-color: red;
   background-color: #F55;
+}
+
+#settings_button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 15;
+  height: 15;
+  border: 2px outset blue;
+  background: #AAF;
+}
+
+#settings_panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 2px 21px 2px 2px;
+  visibility: hidden;
+  border: 2px outset blue;
+  background: #AAF;
 }
