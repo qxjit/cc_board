@@ -1,0 +1,16 @@
+body {
+  background-color: #DDD;
+}
+
+.build {
+  border: 2px groove green;
+  background-color: #AFA;
+  padding: 5px;
+  float: left;
+  margin: 2px;
+}
+
+.failure {
+  border-color: red;
+  background-color: #F55;
+}

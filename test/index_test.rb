@@ -1,17 +1,4 @@
-$LOAD_PATH.unshift File.dirname(__FILE__) + "/../vendor/rack-0.4.0/lib"
-$LOAD_PATH.unshift File.dirname(__FILE__) + "/../vendor/sinatra-0.3.3/lib"
-
-require 'rubygems'
-require 'sinatra'
-require 'sinatra/test/unit'
-require File.dirname(__FILE__) + "/../cc_board"
-
-# Views is set relative to the test file rather than the app file
-Sinatra.options.views = File.dirname(__FILE__) + "/../views"
-
-$LOAD_PATH.unshift File.dirname(__FILE__) + "/../vendor/thoughtbot-shoulda-2.0.6/lib"
-require 'shoulda'
-Configuration.build_data_dir = File.dirname(__FILE__) + "/builds"
+require File.dirname(__FILE__) + '/test_helper'
 
 class IndexTest < Test::Unit::TestCase
   def self.should_show_build(build_name)

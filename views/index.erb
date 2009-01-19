@@ -1,3 +1,14 @@
-<% @builds.each do |builds| %>
-  <div><%= builds %></div>
-<% end %>
+<html>
+  <head>
+    <title>CC Board</title>
+    <link href="application.css" rel="stylesheet"></link>
+    <meta http-equiv="refresh" content="10" />
+  </head>
+  <body>
+    <% @build_lists.each do |list| %>
+      <% list.each do |build| %>
+        <div class="build <%= build.status %>"><%= build.name %></div>
+      <% end %>
+    <% end %>
+  </body>
+</html>

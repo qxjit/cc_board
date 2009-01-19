@@ -1,7 +1,4 @@
-require File.dirname(__FILE__) + "/../build_poller"
-$LOAD_PATH.unshift File.dirname(__FILE__) + "/../vendor/thoughtbot-shoulda-2.0.6/lib"
-require 'test/unit'
-require 'shoulda'
+require File.dirname(__FILE__) + '/test_helper'
 require 'socket'
 require 'tmpdir'
 

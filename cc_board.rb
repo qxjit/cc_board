@@ -3,17 +3,12 @@ $LOAD_PATH.unshift File.dirname(__FILE__) + "/vendor/sinatra-0.3.3/lib"
 
 require 'rubygems'
 require 'sinatra'
-require 'rexml/document'
 require 'lib/configuration'
+require 'lib/build_list'
 
 get "/" do
-  @builds = []
-
-  Dir[Configuration.build_data_dir + "/*"].each do |filename|
-    doc = REXML::Document.new(File.read(filename))
-    doc.root.each_element("//Project") do |build_element|
-      @builds << build_element.attributes["name"]
-    end
+  @build_lists = Dir[Configuration.build_data_dir + "/*"].map do |filename|
+    BuildList.new filename
   end
 
   erb :index
