@@ -21,3 +21,13 @@ class BuildPoller
     end
   end
 end
+
+if __FILE__ == $0
+  require 'lib/configuration'
+  servers = File.readlines(Configuration.servers_file).map {|l| l.strip}.reject {|l| l.empty?}
+  poller = BuildPoller.new(servers, Configuration.build_data_dir)
+  loop do
+    poller.poll_once
+    sleep 20
+  end
+end
