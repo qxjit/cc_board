@@ -11,6 +11,7 @@ Sinatra.options.views = File.dirname(__FILE__) + "/../views"
 
 $LOAD_PATH.unshift File.dirname(__FILE__) + "/../vendor/thoughtbot-shoulda-2.0.6/lib"
 require 'shoulda'
+Configuration.build_data_dir = File.dirname(__FILE__) + "/builds"
 
 class IndexTest < Test::Unit::TestCase
   def self.should_show_build(build_name)
