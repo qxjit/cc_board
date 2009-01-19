@@ -6,20 +6,23 @@ require 'socket'
 require 'tmpdir'
 
 class BuildPollerTest < Test::Unit::TestCase
-  context "polling multiple servers" do
+  context "after polling multiple servers" do
     setup do
       @server_1 = TestServer.start(8101, "server 1 content")
       @server_2 = TestServer.start(8102, "server 2 content")
+      @test_dir = Dir.tmpdir + "/build_poller_test.#{Time.now.to_f}"
+
+      Dir.mkdir @test_dir
+      poller = BuildPoller.new(["http://localhost:8101/", "http://localhost:8102"], @test_dir)
+      poller.poll_once
     end
 
-    should "write files for each server to directory" do
-      test_dir = Dir.tmpdir + "/build_poller_test.#{Time.now.to_f}"
-      Dir.mkdir test_dir
-      poller = BuildPoller.new(["http://localhost:8101/", "http://localhost:8102"], test_dir)
-      poller.poll_once
+    should "have file from locahost.8101" do
+      assert_equal "server 1 content", File.read(@test_dir + "/localhost.8101")
+    end
 
-      assert_equal "server 1 content", File.read(test_dir + "/localhost.8101")
-      assert_equal "server 2 content", File.read(test_dir + "/localhost.8102")
+    should "have file from locahost.8102" do
+      assert_equal "server 2 content", File.read(@test_dir + "/localhost.8102")
     end
 
     teardown do
