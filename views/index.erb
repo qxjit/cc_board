@@ -59,7 +59,13 @@
     <div id="settings_button" onclick="toggleSettingsPanel();">+</div>
     <% @build_lists.each do |list| %>
       <% list.each do |build| %>
-        <div class="build <%= build.status %>"><%= build.name %></div>
+        <div class="build <%= build.status %>">
+          <a href="<%= build.url || '#' %>" 
+             onclick="<%= "alert('No URL Available'); return false" unless build.url %>"
+             target="_blank">
+             <%= build.name %>
+         </a>
+        </div>
       <% end %>
     <% end %>
   </body>

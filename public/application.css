@@ -42,3 +42,8 @@ body {
   border: 2px outset blue;
   background: #AAF;
 }
+
+a {
+  text-decoration: none;
+  color: black;
+}

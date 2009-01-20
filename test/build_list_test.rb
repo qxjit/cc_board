@@ -28,5 +28,15 @@ class BuildListTest < Test::Unit::TestCase
     should "indicate success for builds with any status other than failure" do
       assert_equal "success", @list.find {|b| b.name == "passing build"}.status
     end
+
+    should "allow access to the url" do
+      assert_equal "http://test/build1", @list.find {|b| b.name == "passing build"}.url
+    end
+  end
+
+  context "a build for a list with a blank url" do
+    should "return nil for the url" do
+      assert_equal nil, BuildList::Build.new(nil, nil, "  ").url
+    end
   end
 end
