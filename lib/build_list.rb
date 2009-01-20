@@ -9,10 +9,12 @@ class BuildList
 
   def each
     doc = REXML::Document.new(File.read(@filename))
-    doc.root.each_element("//Project") do |build_element|
-      yield Build.new(build_element.attributes["name"], 
-                      map_cc_tray_status(build_element.attributes["lastBuildStatus"]),
-                      build_element.attributes["webUrl"])
+    if doc && doc.root
+      doc.root.each_element("//Project") do |build_element|
+        yield Build.new(build_element.attributes["name"], 
+                        map_cc_tray_status(build_element.attributes["lastBuildStatus"]),
+                        build_element.attributes["webUrl"])
+      end
     end
   end
 

@@ -33,4 +33,17 @@ class BuildListTest < Test::Unit::TestCase
       assert_equal "http://test/build1", @list.find {|b| b.name == "passing build"}.url
     end
   end
+
+  context "a list parsed from empty cc_tray output" do
+    setup do
+      @file = Tempfile.new("build_list_test")
+      @list = BuildList.new(@file.path)
+    end
+
+    teardown {@file.close}
+
+    should "contain nothing" do
+      assert_equal 0, @list.inject(0) {|sum, i| sum + 1}
+    end
+  end
 end
