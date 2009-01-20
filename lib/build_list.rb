@@ -23,14 +23,10 @@ class BuildList
   end
 
   class Build
-    attr_reader :name, :status
+    attr_reader :name, :status, :url
 
     def initialize(name, status, url)
-      @name, @status, @url = name, status, url.strip
-    end
-
-    def url
-      @url unless @url.empty?
+      @name, @status, @url = name, status, url
     end
   end
 end

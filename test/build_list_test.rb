@@ -33,10 +33,4 @@ class BuildListTest < Test::Unit::TestCase
       assert_equal "http://test/build1", @list.find {|b| b.name == "passing build"}.url
     end
   end
-
-  context "a build for a list with a blank url" do
-    should "return nil for the url" do
-      assert_equal nil, BuildList::Build.new(nil, nil, "  ").url
-    end
-  end
 end
