@@ -14,8 +14,8 @@ class BuildPoller
   end
 
   def poll_uri(uri)
-    File.open(@build_directory + "/#{uri.host}.#{uri.port}", "w") do |f|
-      Net::HTTP.get_response(uri) do |response|
+    Net::HTTP.get_response(uri) do |response|
+      File.open(@build_directory + "/#{uri.host}.#{uri.port}", "w") do |f|
         f << response.body
       end
     end
