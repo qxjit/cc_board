@@ -23,6 +23,10 @@ body {
   background-color: #F55;
 }
 
+.building {
+    text-decoration: blink;
+}
+
 #settings_button {
   position: absolute;
   right: 0;

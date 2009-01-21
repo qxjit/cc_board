@@ -13,6 +13,7 @@ class BuildList
       doc.root.each_element("//Project") do |build_element|
         yield Build.new(build_element.attributes["name"], 
                         map_cc_tray_status(build_element.attributes["lastBuildStatus"]),
+                        build_element.attributes["activity"].downcase,
                         build_element.attributes["webUrl"])
       end
     end
@@ -25,10 +26,10 @@ class BuildList
   end
 
   class Build
-    attr_reader :name, :status, :url
+    attr_reader :name, :status, :activity, :url
 
-    def initialize(name, status, url)
-      @name, @status, @url = name, status, url
+    def initialize(name, status, activity, url)
+      @name, @status, @activity, @url = name, status, activity, url
     end
   end
 end

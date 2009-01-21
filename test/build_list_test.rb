@@ -6,8 +6,8 @@ class BuildListTest < Test::Unit::TestCase
       @file = Tempfile.new("build_list_test")
       @file << <<-END_XML
 <Projects>
-  <Project name="passing build" webUrl="http://test/build1" lastBuildStatus="RandomNonFailureStatus"/>
-  <Project name="failing build" webUrl="http://test/build2" lastBuildStatus="Failure"/>
+  <Project name="passing build" webUrl="http://test/build1" lastBuildStatus="RandomNonFailureStatus" activity="Building"/>
+  <Project name="failing build" webUrl="http://test/build2" lastBuildStatus="Failure" activity="Sleeping"/>
 </Projects>
       END_XML
       @file.flush
@@ -31,6 +31,14 @@ class BuildListTest < Test::Unit::TestCase
 
     should "allow access to the url" do
       assert_equal "http://test/build1", @list.find {|b| b.name == "passing build"}.url
+    end
+    
+    should "parse a building activity" do
+      assert_equal "building", @list.find {|b| b.name == "passing build"}.activity
+    end
+    
+    should "parse a sleeping activity" do
+      assert_equal "sleeping", @list.find {|b| b.name == "failing build"}.activity
     end
   end
 
