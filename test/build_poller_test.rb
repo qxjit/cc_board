@@ -27,6 +27,25 @@ class BuildPollerTest < Test::Unit::TestCase
       @server_2.stop
     end
   end
+
+  context "when polling a server generates an exception" do
+    setup do
+      @good_server = TestServer.start(8101, "good server content")
+      @test_dir = Dir.tmpdir + "/build_poller_test.#{Time.now.to_f}"
+
+      Dir.mkdir @test_dir
+      poller = BuildPoller.new(["http://localhost:8101/", "http://localhost:8102"], @test_dir)
+      poller.poll_once
+    end
+
+    should "not prevent other servers from being polled" do
+      assert_equal "good server content", File.read(@test_dir + "/localhost.8101")
+    end
+
+    teardown do
+      @good_server.stop
+    end
+  end
 end
 
 class TestServer

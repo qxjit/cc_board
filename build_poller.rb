@@ -9,7 +9,10 @@ class BuildPoller
 
   def poll_once
     @urls.each do |url|
-      poll_uri(URI.parse(url))
+      begin
+        poll_uri(URI.parse(url))
+      rescue Exception => e
+      end
     end
   end
 
