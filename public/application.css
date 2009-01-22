@@ -24,7 +24,7 @@ body {
 }
 
 .building {
-    text-decoration: blink;
+  font-style: italic;
 }
 
 #settings_button {
