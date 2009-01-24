@@ -4,6 +4,10 @@ body {
   margin: 0;
 }
 
+form {
+  margin: 0;
+}
+
 .build {
   border: 2px groove green;
   background-color: #AFA;
@@ -51,7 +55,7 @@ body {
   position: absolute;
   right: 0;
   top: 0;
-  padding: 4px 23px 4px 4px;
+  padding: 6px 25px 6px 6px;
   visibility: hidden;
   border: 2px solid blue;
   background: #817fff;
