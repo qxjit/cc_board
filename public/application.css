@@ -32,19 +32,18 @@ body {
   background-image: url(building-failure.gif);
 }
 
-#settings_button {
+.settings_button {
   position: absolute;
   right: 0;
   top: 0;
   width: 20px;
   height: 20px;
-}
-
-#settings_button.closed {
   background-image: url(settings-button-closed.png);
 }
 
-#settings_button.opened {
+.settings_button.opened {
+  right: -2;
+  top: -2;
   background-image: url(settings-button-opened.png);
 }
 

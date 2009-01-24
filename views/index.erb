@@ -19,17 +19,14 @@
         allow_refresh = false;
       }
 
-      function toggleSettingsPanel() {
-        var panel = $('settings_panel');
-        if (panel.style.visibility == 'hidden') {
-          disableRefresh();
-          panel.style.visibility = 'visible';
-          $('settings_button').className = 'opened';
-        } else {
-          enableRefresh();
-          panel.style.visibility = 'hidden';
-          $('settings_button').className = 'closed';
-        }
+      function openSettingsPanel() {
+        disableRefresh();
+        $('settings_panel').style.visibility = 'visible';
+      }
+
+      function closeSettingsPanel() {
+        enableRefresh();
+        $('settings_panel').style.visibility = 'hidden';
       }
 
       function changeTextSize(size) {
@@ -53,12 +50,13 @@
     </script>
   </head>
   <body id="body">
+    <div class="settings_button" onclick="openSettingsPanel(); return false;"></div>
     <div id="settings_panel">
+      <div class="settings_button opened" onclick="closeSettingsPanel(); return false;"></div>
       <form action="#">
         Text Size: <input id="text_size_input" type="text" size="5" onchange="changeTextSize(this.value)"/>%
       </form>
     </div>
-    <div id="settings_button" class="closed" onclick="toggleSettingsPanel();return false"></div>
     <% @build_lists.each do |list| %>
       <% list.each do |build| %>
         <div class="build <%= build.status %> <%= build.activity %>">
