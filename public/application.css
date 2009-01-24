@@ -52,10 +52,10 @@ body {
   position: absolute;
   right: 0;
   top: 0;
-  padding: 2px 21px 2px 2px;
+  padding: 4px 23px 4px 4px;
   visibility: hidden;
-  border: 2px outset blue;
-  background: #AAF;
+  border: 2px solid blue;
+  background: #817fff;
 }
 
 a {
