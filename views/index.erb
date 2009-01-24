@@ -24,9 +24,11 @@
         if (panel.style.visibility == 'hidden') {
           disableRefresh();
           panel.style.visibility = 'visible';
+          $('settings_button').className = 'opened';
         } else {
           enableRefresh();
           panel.style.visibility = 'hidden';
+          $('settings_button').className = 'closed';
         }
       }
 
@@ -56,7 +58,7 @@
         Text Size: <input id="text_size_input" type="text" onchange="changeTextSize(this.value)"/>%
       </form>
     </div>
-    <div id="settings_button" onclick="toggleSettingsPanel();">+</div>
+    <div id="settings_button" class="closed" onclick="toggleSettingsPanel();return false"></div>
     <% @build_lists.each do |list| %>
       <% list.each do |build| %>
         <div class="build <%= build.status %> <%= build.activity %>">

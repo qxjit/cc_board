@@ -36,10 +36,16 @@ body {
   position: absolute;
   right: 0;
   top: 0;
-  width: 15;
-  height: 15;
-  border: 2px outset blue;
-  background: #AAF;
+  width: 20px;
+  height: 20px;
+}
+
+#settings_button.closed {
+  background-image: url(settings-button-closed.png);
+}
+
+#settings_button.opened {
+  background-image: url(settings-button-opened.png);
 }
 
 #settings_panel {
