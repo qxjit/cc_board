@@ -6,7 +6,7 @@ class BuildListTest < Test::Unit::TestCase
       @file = Tempfile.new("build_list_test")
       @file << <<-END_XML
 <Projects>
-  <Project name="passing build" webUrl="http://test/build1" lastBuildStatus="RandomNonFailureStatus" activity="Building"/>
+  <Project name="passing build" webUrl="http://test/build1" lastBuildStatus="Success" activity="Building"/>
   <Project name="failing build" webUrl="http://test/build2" lastBuildStatus="Failure" activity="Sleeping"/>
 </Projects>
       END_XML
@@ -21,11 +21,11 @@ class BuildListTest < Test::Unit::TestCase
       assert_contains @list.map {|b| b.name}, "failing build"
     end
 
-    should "indicate failure for builds with last status Failure" do
+    should "parse a failure status" do
       assert_equal "failure", @list.find {|b| b.name == "failing build"}.status
     end
 
-    should "indicate success for builds with any status other than failure" do
+    should "parse a success status" do
       assert_equal "success", @list.find {|b| b.name == "passing build"}.status
     end
 
