@@ -18,13 +18,18 @@ body {
   line-height: 100%;
 }
 
+.building {
+  font-style: italic;
+  background-image: url(building.gif);
+}
+
 .failure {
   border-color: red;
   background-color: #F55;
 }
 
-.building {
-  font-style: italic;
+.building.failure {
+  background-image: url(building-failure.gif);
 }
 
 #settings_button {
