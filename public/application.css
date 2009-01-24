@@ -20,6 +20,7 @@ form {
       less height total in firefox
   */ 
   line-height: 100%;
+  cursor: pointer;
 }
 
 .building {
@@ -43,6 +44,7 @@ form {
   width: 20px;
   height: 20px;
   background-image: url(settings-button-closed.png);
+  cursor: pointer;
 }
 
 .settings_button.opened {
