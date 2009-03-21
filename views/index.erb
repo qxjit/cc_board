@@ -10,7 +10,7 @@
     <div class="settings_button" onclick="openSettingsPanel(); return false;"></div>
     <div id="settings_panel">
       <div class="settings_button opened" onclick="closeSettingsPanel(); return false;"></div>
-      <form action="#">
+      <form action="#" onsubmit="return false">
         Text Size: <input id="text_size_input" type="text" size="5" onchange="changeTextSize(this.value)"/>%
       </form>
     </div>
