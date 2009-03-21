@@ -3,7 +3,7 @@ require 'hpricot'
 
 class IndexTest < Test::Unit::TestCase
   def self.should_show_build(build_name)
-    should "show show build: #{build_name}" do
+    should "show build: #{build_name}" do
       assert_match build_name, @response.body
     end
   end

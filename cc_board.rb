@@ -20,13 +20,26 @@ helpers do
   def versioned_asset(filename)
     "#{filename}?#{File.mtime(ASSET_DIR + filename).to_i}"
   end
+
+  def build_lists
+    Dir[Configuration.build_data_dir + "/*"].map do |filename|
+      BuildList.new filename
+    end
+  end
 end
 
 get "/" do
-  @build_lists = Dir[Configuration.build_data_dir + "/*"].map do |filename|
-    BuildList.new filename
-  end
-
+  @build_lists = build_lists
   erb :index
 end
 
+get "/XmlStatusReport.aspx" do
+  document = REXML::Document.new
+  document.add_element REXML::Element.new("Projects")
+
+  build_lists.each {|l| l.insert_into document}
+
+  output = ""
+  REXML::Formatters::Pretty.new.write document, output
+  output
+end

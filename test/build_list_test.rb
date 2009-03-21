@@ -40,6 +40,19 @@ class BuildListTest < Test::Unit::TestCase
     should "parse a sleeping activity" do
       assert_equal "sleeping", @list.find {|b| b.name == "failing build"}.activity
     end
+
+    should "reproduce elements in new xml document" do
+      document = REXML::Document.new
+      document.add_element REXML::Element.new("Projects")
+      @list.insert_into document
+      formatter = REXML::Formatters::Pretty.new
+      expected, actual = "", ""
+
+      formatter.write document, actual
+      formatter.write REXML::Document.new(File.new(@file.path)), expected
+
+      assert_equal expected, actual
+    end
   end
 
   context "a list parsed from empty cc_tray output" do
